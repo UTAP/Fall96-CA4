@@ -29,7 +29,7 @@ match.o: match.o match.h team.h
 	$(CC) $(CFLAGS) match.cpp
 
 stadium.o: stadium.o stadium.h
-	$(CC) $(CFLAGS) staduim.cpp
+	$(CC) $(CFLAGS) stadium.cpp
 
 clean:
 	rm -rf *o *_out	
