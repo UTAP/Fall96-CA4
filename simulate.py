@@ -63,12 +63,18 @@ class Match:
 		team_1_defend, team_1_midfield, team_1_attack = self.team_1.count_team_power()
 		team_2_defend, team_2_midfield, team_2_attack = self.team_2.count_team_power()
 
+		fans_team_1 = self.team_1.fans_in_stadium[self.team_1.stadium_name]
 		fans_team_2 = self.team_2.fans_in_stadium[self.team_1.stadium_name]
-		if self.team_1.stadium_capacity-self.team_1.fans_in_stadium[self.team_1.stadium_name] < fans_team_2:
-			fans_team_2 = self.team_1.stadium_capacity-self.team_1.fans_in_stadium[self.team_1.stadium_name]
+		stadium_capacity = self.team_1.stadium_capacity
+		# print "fans-1: {}, fans-2: {}, whole: {}".format(fans_team_1, fans_team_2, stadium_capacity)
+
+		if (stadium_capacity - fans_team_1) < fans_team_2:
+			fans_team_2 = stadium_capacity - fans_team_1
 
 		stadium_impact_1 = math.floor(self.team_1.stadium_impact * (self.team_1.fans_in_stadium[self.team_1.stadium_name] / float(self.team_1.stadium_capacity)))
 		stadium_impact_2 = math.floor(self.team_1.stadium_impact * (fans_team_2 / float(self.team_1.stadium_capacity)))
+
+		# print "impact-1: {}, impact-2: {}".format(stadium_impact_1, stadium_impact_2)
 
 		team_1_defend += stadium_impact_1
 		team_1_midfield += stadium_impact_1
@@ -78,8 +84,11 @@ class Match:
 		team_2_midfield += stadium_impact_2
 		team_2_attack += stadium_impact_2
 
-		self.goal_team_1 = math.floor((((team_1_attack*team_1_midfield)/float((team_2_defend*team_2_midfield)))**(1.5))*(3))
-		self.goal_team_2 = math.floor((((team_2_attack*team_2_midfield)/float((team_1_defend*team_1_midfield)))**(1.5))*(3))
+		# print "{}: {}-{}-{}".format(self.team_1.name, team_1_defend, team_1_midfield, team_1_attack)
+		# print "{}: {}-{}-{}".format(self.team_2.name, team_2_defend, team_2_midfield, team_2_attack)
+
+		self.goal_team_1 = math.floor((((team_1_attack*team_1_midfield)/float((team_2_defend*team_2_midfield)))**(1.5))*(3.0))
+		self.goal_team_2 = math.floor((((team_2_attack*team_2_midfield)/float((team_1_defend*team_1_midfield)))**(1.5))*(3.0))
 		return self.goal_team_1, self.goal_team_2
 
 fans_in_stadium = {}
@@ -89,7 +98,7 @@ fans_in_stadium["Camp Nou"] = 3000;
 fans_in_stadium["Santiago Bernabeu"] = 2000;
 fans_in_stadium["Emirates Stadium"] = 54000;
 fans_in_stadium["Anfield"] = 10000;
-arsenal = Team("Arsenal", "Emirates Stadium", 60000, 3, fans_in_stadium);
+arsenal = Team("Arsenal", "Emirates Stadium", 60000, 3, fans_in_stadium.copy());
 arsenal.add_player("Ospina", 79, GOALKEEPER);
 arsenal.add_player("Mertesacker", 81, DEFENDER);
 arsenal.add_player("Koscielny", 84, DEFENDER);
@@ -102,8 +111,11 @@ arsenal.add_player("Lacazette", 85, STRIKER);
 arsenal.add_player("Giroud", 82, STRIKER);
 arsenal.add_player("Sanchez", 89, STRIKER);
 
-fans_in_stadium = {"Camp Nou": 90000, "Santiago Bernabeu": 10000, "Emirates Stadium": 4000, "Anfield": 5000}
-barcelona = Team("Barcelona", "Camp Nou", 100000, 5, fans_in_stadium);
+fans_in_stadium["Camp Nou"] = 90000;
+fans_in_stadium["Santiago Bernabeu"] = 10000;
+fans_in_stadium["Emirates Stadium"] = 4000;
+fans_in_stadium["Anfield"] = 5000;
+barcelona = Team("Barcelona", "Camp Nou", 100000, 5, fans_in_stadium.copy());
 barcelona.add_player("Ter Stegen", 85, GOALKEEPER);
 barcelona.add_player("Sergi Roberto", 81, DEFENDER);
 barcelona.add_player("Pique", 87, DEFENDER);
@@ -120,7 +132,7 @@ fans_in_stadium["Camp Nou"] = 3000;
 fans_in_stadium["Santiago Bernabeu"] = 2000;
 fans_in_stadium["Emirates Stadium"] = 10000;
 fans_in_stadium["Anfield"] = 48000;
-liverpool = Team("Liverpool", "Anfield", 54000, 4, fans_in_stadium);
+liverpool = Team("Liverpool", "Anfield", 54000, 4, fans_in_stadium.copy());
 liverpool.add_player("Mignolet", 80, GOALKEEPER);
 liverpool.add_player("Matip", 83, DEFENDER);
 liverpool.add_player("Lovren", 81, DEFENDER);
@@ -137,7 +149,7 @@ fans_in_stadium["Camp Nou"] = 15000
 fans_in_stadium["Santiago Bernabeu"] = 70000
 fans_in_stadium["Emirates Stadium"] = 5000
 fans_in_stadium["Anfield"] = 7500
-real = Team("Real Madrid", "Santiago Bernabeu", 80000, 5, fans_in_stadium)
+real = Team("Real Madrid", "Santiago Bernabeu", 80000, 5, fans_in_stadium.copy())
 real.add_player("Navas", 85, GOALKEEPER);
 real.add_player("Ramos", 90, DEFENDER);
 real.add_player("Varane", 85, DEFENDER);
