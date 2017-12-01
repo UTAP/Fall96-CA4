@@ -57,7 +57,10 @@ void Cup::check_teams() {
 }
 
 bool Cup::validate_number_of_teams(vector<Team*> in_cup_teams) {
-    int n = teams.size();
+    int n = 0;
+    for (int i = 0; i < teams.size() ; i++ )
+        if (teams[i]->is_valid())
+            n++;
     if ((n == 0) or ((n & (n-1)) != 0)) {
         cout << "Inadequate teams" << endl;
         return false;
@@ -71,7 +74,8 @@ void Cup::print_tournament_results() {
 }
 
 void Cup::print_round_results(int round_number) {
-    rounds[round_number-1].print_round();
+    if (rounds.size() >= round_number)
+        rounds[round_number-1].print_round();
 }
 
 void Cup::print_team_results(string team_name) {

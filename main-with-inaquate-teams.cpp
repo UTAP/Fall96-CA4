@@ -28,7 +28,6 @@ int main(){
 	ap_cup.add_player(team_name, "Rakitic", 87, MIDFIELDER);
 	ap_cup.add_player(team_name, "Busquets", 86, MIDFIELDER);
 	ap_cup.add_player(team_name, "Iniesta", 87, MIDFIELDER);
-	ap_cup.add_player(team_name, "Suarez", 92, STRIKER);
 	ap_cup.add_player(team_name, "Messi", 93, STRIKER);
 	ap_cup.add_player(team_name, "Dembele", 83, STRIKER);
 

@@ -37,9 +37,9 @@ void Match::penalty_time() {
     int first_team_fans_impact = second_team->get_fans_impact(first_team); 
     int second_team_fans_impact = second_team->get_fans_impact(); 
 
-    float prob1 = (first_team->get_attack_power() + first_team_fans_impact) / (second_team->get_goalkeeper_power());
-    float prob2 = (second_team->get_attack_power() + second_team_fans_impact) / (first_team->get_goalkeeper_power());
-    
+    float prob1 = ((float)first_team->get_attack_power() + first_team_fans_impact) / (second_team->get_goalkeeper_power());
+    float prob2 = ((float)second_team->get_attack_power() + second_team_fans_impact) / (first_team->get_goalkeeper_power());
+
     if (prob1 > prob2) {
         second_team->set_participation_status(false);
         winner = first_team;
