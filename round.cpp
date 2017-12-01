@@ -26,8 +26,9 @@ void Round::simulate() {
 
 void Round::print_round() {
     cout << "Round " << round_number << endl;
-    for (int i = 0; i < matches.size() ; i++ )
+    for (int i = 0; i < matches.size() ; i++ ){
         matches[i].print_match();
+    }
 }
 
 void Round::print_team_result(Team* team) {

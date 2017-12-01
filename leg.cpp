@@ -25,7 +25,7 @@ void Leg::simulate() {
 }
 
 int Leg::get_num_of_goals(int home_attack, int home_midfield, int away_deffend, int away_midfield) {
-    float result = (home_attack * home_midfield) / (away_midfield * away_deffend);
+    float result = (float)(home_attack * home_midfield) / (float)(away_midfield * away_deffend);
     return floor(3 * result * sqrt(result));
 }
 

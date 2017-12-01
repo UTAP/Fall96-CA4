@@ -3,7 +3,9 @@
 using namespace std;
 
 Match::Match(Team* home, Team* away, int number) 
-    : first_leg(home, away), second_leg(away, home), match_number(number), first_team(home), second_team(away) {}
+    : first_leg(home, away), second_leg(away, home), match_number(number), first_team(home), second_team(away) {
+        winner = NULL;
+    }
 
 void Match::simulate() {
     first_leg.simulate();
@@ -46,6 +48,7 @@ void Match::penalty_time() {
         first_team->set_participation_status(false);
         winner = second_team;
     }
+
 }
 
 void Match::print_match() {

@@ -28,6 +28,7 @@ void Cup::simulate(){
         while(in_cup_teams.size() != 1){
             Round new_round(in_cup_teams, round_number);   
             new_round.simulate();
+            rounds.push_back(new_round);
 
             in_cup_teams = get_in_cup_teams();
             round_number++;
