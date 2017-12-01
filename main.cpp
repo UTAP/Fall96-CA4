@@ -1,11 +1,11 @@
-#include "tournament.h"
+#include "Tournament.h"
 #include <map>
 #include <string>
 
 using namespace std;
 
 #define GOALKEEPER "goalkeeper"
-#define DEFENDER "defener"
+#define DEFENDER "defender"
 #define MIDFIELDER "midfielder"
 #define STRIKER "striker"
 
@@ -94,9 +94,10 @@ int main(){
 
 	ap_cup.simulate();
 
-	ap_cup.print_tournament_results();
-	ap_cup.print_round_results(1);
-	ap_cup.print_team_results("Barcelona");
+    ap_cup.print_tournament_results();
+    ap_cup.print_round_results(1);
+    ap_cup.print_team_results("Barcelona");
+
 
 	return 0;
 }

@@ -88,7 +88,7 @@ class Match:
 		# print "{}: {}-{}-{}".format(self.team_2.name, team_2_defend, team_2_midfield, team_2_attack)
 
 		self.goal_team_1 = math.floor((((team_1_attack*team_1_midfield)/float((team_2_defend*team_2_midfield)))**(1.5))*(3.0))
-		self.goal_team_2 = math.floor((((team_2_attack*team_2_midfield)/float((team_1_defend*team_1_midfield)))**(1.5))*(3.0))
+		self.goal_team_2 = math.floor((((team_2_attack*team_2_midfield)/float((team_1_defend*team_1_midfield)))**(1.5))*(3.0 ))
 		return self.goal_team_1, self.goal_team_2
 
 fans_in_stadium = {}
