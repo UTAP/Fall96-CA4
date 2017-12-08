@@ -2,13 +2,25 @@
 CC=g++
 CFLAGS=-c
 HEADERS=match.h player.h round.h stadium.h team.h tournament.h cup.h leg.h
-OBJECTS=main.o match.o player.o round.o stadium.o team.o tournament.o cup.o leg.cpp
+OBJECTS=match.o player.o round.o stadium.o team.o tournament.o cup.o leg.cpp
 
 #defining rules:
 all: out
 
-out: $(HEADERS) $(OBJECTS)
-	$(CC) $(OBJECTS) -o out
+out: $(HEADERS) $(OBJECTS) main.o 
+	$(CC) $(OBJECTS) main.o -o out
+
+out_2: $(HEADERS) $(OBJECTS) main-with-extra-players.o 
+	$(CC) $(OBJECTS) main-with-extra-players.o -o out
+
+out_3: $(HEADERS) $(OBJECTS) main-with-penalty.o
+	$(CC) $(OBJECTS) main-with-penalty.o -o out
+
+out_4: $(HEADERS) $(OBJECTS) main-with-inaquate-teams.o
+	$(CC) $(OBJECTS) main-with-inaquate-teams.o -o out
+
+out_5: $(HEADERS) $(OBJECTS) main-bigger-testcase.o
+	$(CC) $(OBJECTS) main-bigger-testcase.o -o out
 
 main.o: main.cpp tournament.h
 	$(CC) $(CFLAGS) main.cpp
