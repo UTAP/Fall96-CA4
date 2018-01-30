@@ -8,7 +8,7 @@ fi
 OUTPUT_DIR=output
 TEST_CASE_DIR=testcase
 MAINS_DIR=mains
-CODE_DIR=${1}
+CODE_DIR="${1}"
 EXE="./a.out"
 if [[ $# > 1 ]]; then
 	EXE=./${2}
