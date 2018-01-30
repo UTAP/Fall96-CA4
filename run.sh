@@ -39,7 +39,12 @@ for file in ${MAINS[*]}; do
 	echo -e "\n${CYAN}Testcase $counter ($file)${NC}"
 	cp -f $MAINS_DIR/$file "$CODE_DIR"/main.cpp
 	pushd "$CODE_DIR"
-	make || exit 1
+	make || {
+		echo -e "${RED}Make Failure${NC}"
+		((wrong_test_cases++))
+		popd
+		continue
+	}
 	$EXE > $OUTPUT_DIR/out_$counter
 	popd
 	if diff "$CODE_DIR"/$OUTPUT_DIR/out_$counter $TEST_CASE_DIR/out_$counter > /dev/null; then
