@@ -3,6 +3,11 @@
 OUTPUT_DIR=output
 TEST_CASE_DIR=testcase
 MAINS_DIR=mains
+CODE_DIR=${1}
+EXE="./a.out"
+if [[ $# > 1 ]]; then
+	EXE=./${2}
+fi
 
 # defining colors
 RED="\033[0;31m"
@@ -15,15 +20,21 @@ counter=1
 if [[ -d $OUTPUT_DIR ]]; then
 	rm -rf $OUTPUT_DIR
 fi
-mkdir $OUTPUT_DIR
 accepted_test_cases=0
 wrong_test_cases=0
+pushd $CODE_DIR
+mkdir $OUTPUT_DIR
 make clean
+rm *.o
+make
+popd
 for file in ${MAINS[*]}; do
-	echo -e "${CYAN}Testcase $counter ($file)${NC}"
-	cp -f $MAINS_DIR/$file "main.cpp"
-	make && ./${1} > $OUTPUT_DIR/out_$counter
-	if diff $OUTPUT_DIR/out_$counter $TEST_CASE_DIR/out_$counter > /dev/null; then
+	echo -e "\n${CYAN}Testcase $counter ($file)${NC}"
+	cp -f $MAINS_DIR/$file $CODE_DIR/main.cpp
+	pushd $CODE_DIR
+	make && $EXE > $OUTPUT_DIR/out_$counter
+	popd
+	if diff $CODE_DIR/$OUTPUT_DIR/out_$counter $TEST_CASE_DIR/out_$counter > /dev/null; then
 		echo -e "${GREEN}Accepted${NC}"
 		((accepted_test_cases++))
 	else
@@ -31,8 +42,7 @@ for file in ${MAINS[*]}; do
 		((wrong_test_cases++))
 	fi
 	((counter++))
-	echo ""
 done
 
-echo -e "${CYAN}==========================${NC}"
+echo -e "\n${CYAN}==========================${NC}"
 echo -e "${GREEN}passed${NC}: $accepted_test_cases\t${RED}failed${NC}: $wrong_test_cases"
