@@ -18,6 +18,7 @@ fi
 mkdir $OUTPUT_DIR
 accepted_test_cases=0
 wrong_test_cases=0
+make clean
 for file in ${MAINS[*]}; do
 	echo -e "${CYAN}Testcase $counter ($file)${NC}"
 	cp -f $MAINS_DIR/$file "main.cpp"
