@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $# == 0 ]]; then
+    echo -e "usage:\t ${0} code_dir [exe_name]"
+    exit 0
+fi
+
 OUTPUT_DIR=output
 TEST_CASE_DIR=testcase
 MAINS_DIR=mains
