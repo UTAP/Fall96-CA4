@@ -33,6 +33,10 @@ mkdir $OUTPUT_DIR
 make clean
 rm *.o
 make || exit 1
+$EXE &> /dev/null || {
+	echo -e "${RED}$EXE Not Found.${NC}"
+	exit 1
+}
 popd
 
 for file in ${MAINS[*]}; do
@@ -47,7 +51,7 @@ for file in ${MAINS[*]}; do
 	}
 	$EXE > $OUTPUT_DIR/out_$counter
 	popd
-	if diff "$CODE_DIR"/$OUTPUT_DIR/out_$counter $TEST_CASE_DIR/out_$counter > /dev/null; then
+	if diff -wi "$CODE_DIR"/$OUTPUT_DIR/out_$counter $TEST_CASE_DIR/out_$counter > /dev/null; then
 		echo -e "${GREEN}Accepted${NC}"
 		((accepted_test_cases++))
 	else
