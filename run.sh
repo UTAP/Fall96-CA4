@@ -10,6 +10,7 @@ TEST_CASE_DIR=testcase
 MAINS_DIR=mains
 CODE_DIR="${1}"
 EXE="./a.out"
+DIFFTOOL="sdiff -sWiw 60"
 if [[ $# > 1 ]]; then
 	EXE=./${2}
 fi
@@ -57,6 +58,7 @@ for file in ${MAINS[*]}; do
 	else
 		echo -e "${RED}Wrong Answer${NC}"
 		((wrong_test_cases++))
+		$DIFFTOOL "$CODE_DIR"/$OUTPUT_DIR/out_$counter $TEST_CASE_DIR/out_$counter
 	fi
 	((counter++))
 done
