@@ -2,6 +2,7 @@
 
 OUTPUT_DIR=output
 TEST_CASE_DIR=testcase
+MAINS_DIR=mains
 
 # defining colors
 RED="\033[0;31m"
@@ -19,7 +20,7 @@ accepted_test_cases=0
 wrong_test_cases=0
 for file in ${MAINS[*]}; do
 	echo -e "${CYAN}Testcase $counter ($file)${NC}"
-	cp -f $file "main.cpp"
+	cp -f $MAINS_DIR/$file "main.cpp"
 	make && ./${1} > $OUTPUT_DIR/out_$counter
 	if diff $OUTPUT_DIR/out_$counter $TEST_CASE_DIR/out_$counter > /dev/null; then
 		echo -e "${GREEN}Accepted${NC}"
